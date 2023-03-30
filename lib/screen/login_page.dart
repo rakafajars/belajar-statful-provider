@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/screen/register_page.dart';
 import 'package:flutter_application_2/utils/first_capitalize_utils.dart';
+import 'package:flutter_application_2/widget/button_custome.dart';
+import 'package:flutter_application_2/widget/text_field_custome.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -46,12 +48,14 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  TextField(
-                    keyboardType: TextInputType.text,
+                  TextFieldCustome(
+                    hintText: 'Username',
                     onChanged: (value) {
                       _username = value;
                       if (_username.isEmpty) {
                         _isUsernameValid = false;
+                        _isButtonUsernameDisable = false;
+
                         _errorUsernameMessage = "Username Tidak Boleh Kosong!";
                       }
                       // else if (_username[0] != _username[0].toUpperCase()) {
@@ -61,6 +65,8 @@ class _LoginPageState extends State<LoginPage> {
                       // }
                       else if (_username.length < 4) {
                         _isUsernameValid = false;
+                        _isButtonUsernameDisable = false;
+
                         _errorUsernameMessage =
                             "Username harus lebih dari 4 Huruf";
                       }
@@ -74,43 +80,36 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       setState(() {});
                     },
-                    decoration: InputDecoration(
-                      hintText: 'Username',
-                      labelText: 'Username',
-                      errorText:
-                          _isUsernameValid ? null : _errorUsernameMessage,
-                    ),
+                    isValidTextField: _isUsernameValid,
+                    errorMessage: _errorUsernameMessage,
                   ),
-                  TextField(
-                    keyboardType: TextInputType.text,
+                  TextFieldCustome(
                     onChanged: (value) {
                       _password = value;
                       if (_password.isEmpty) {
                         _errorPasswordMessage = "Password Tidak Boleh Kosong";
                         _isPasswordValid = false;
+                        _isButtonPasswordDisable = false;
                       } else {
                         _isPasswordValid = true;
                         _isButtonPasswordDisable = true;
                       }
                       setState(() {});
                     },
-                    obscureText: _isHidePassword,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      labelText: 'Password',
-                      errorText:
-                          _isPasswordValid ? null : _errorPasswordMessage,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          _isHidePassword = !_isHidePassword;
-                          setState(() {});
-                        },
-                        icon: _isHidePassword
-                            ? const Icon(Icons.lock)
-                            : const Icon(
-                                Icons.lock_open,
-                              ),
-                      ),
+                    isObsucreText: _isHidePassword,
+                    isValidTextField: _isPasswordValid,
+                    errorMessage: _errorPasswordMessage,
+                    hintText: 'Password',
+                    suffixIconWidget: IconButton(
+                      onPressed: () {
+                        _isHidePassword = !_isHidePassword;
+                        setState(() {});
+                      },
+                      icon: _isHidePassword
+                          ? const Icon(Icons.lock)
+                          : const Icon(
+                              Icons.lock_open,
+                            ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -127,32 +126,25 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ElevatedButton(
-                onPressed: _isButtonUsernameDisable && _isButtonPasswordDisable
-                    ? () {}
-                    : null,
-                child: const Text(
-                  'Login',
-                ),
-              ),
+            ButtonCustome(
+              onPressed: _isButtonUsernameDisable && _isButtonPasswordDisable
+                  ? () {}
+                  : null,
+              isIcon: true,
+              icon: const Icon(Icons.abc),
+              title: 'Login',
+              padding: const EdgeInsets.all(24),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const RegisterPage(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  'Register',
-                ),
-              ),
+            ButtonCustome(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const RegisterPage(),
+                  ),
+                );
+              },
+              title: 'Register',
             )
           ],
         ),
