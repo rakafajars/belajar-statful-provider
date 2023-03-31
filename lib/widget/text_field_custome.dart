@@ -8,6 +8,7 @@ class TextFieldCustome extends StatelessWidget {
   final bool isObsucreText;
   final Widget? suffixIconWidget;
   final bool isReadOnly;
+  final TextInputType? keyboardType;
   const TextFieldCustome({
     super.key,
     required this.onChanged,
@@ -17,13 +18,14 @@ class TextFieldCustome extends StatelessWidget {
     this.isObsucreText = false,
     this.isReadOnly = false,
     this.suffixIconWidget,
+    this.keyboardType = TextInputType.text,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       readOnly: isReadOnly,
-      keyboardType: TextInputType.text,
+      keyboardType: keyboardType,
       onChanged: onChanged,
       obscureText: isObsucreText,
       decoration: InputDecoration(

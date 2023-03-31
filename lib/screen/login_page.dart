@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/screen/register_page.dart';
-import 'package:flutter_application_2/utils/first_capitalize_utils.dart';
 import 'package:flutter_application_2/widget/button_custome.dart';
 import 'package:flutter_application_2/widget/text_field_custome.dart';
 
@@ -57,24 +56,13 @@ class _LoginPageState extends State<LoginPage> {
                         _isButtonUsernameDisable = false;
 
                         _errorUsernameMessage = "Username Tidak Boleh Kosong!";
-                      }
-                      // else if (_username[0] != _username[0].toUpperCase()) {
-                      //   _isUsernameValid = true;
-                      //   _errorUsernameMessage =
-                      //       "Huruf petama harus diawali dengan kapital";
-                      // }
-                      else if (_username.length < 4) {
+                      } else if (_username.length < 4) {
                         _isUsernameValid = false;
                         _isButtonUsernameDisable = false;
 
                         _errorUsernameMessage =
                             "Username harus lebih dari 4 Huruf";
-                      }
-                      //else if (RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      //   _isUsernameValid = true;
-                      //   _errorUsernameMessage = "Username harus memiliki angka";
-                      // }
-                      else {
+                      } else {
                         _isUsernameValid = true;
                         _isButtonUsernameDisable = true;
                       }
