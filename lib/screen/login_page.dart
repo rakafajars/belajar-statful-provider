@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/screen/dashboard_screen.dart';
 import 'package:flutter_application_2/screen/register_page.dart';
+import 'package:flutter_application_2/utils/shared_pref.dart';
 import 'package:flutter_application_2/widget/button_custome.dart';
 import 'package:flutter_application_2/widget/text_field_custome.dart';
 
@@ -26,6 +28,25 @@ class _LoginPageState extends State<LoginPage> {
   bool _isButtonUsernameDisable = false;
   bool _isButtonPasswordDisable = false;
 
+  void _validateUsername(String value) {
+    _username = value;
+    if (_username.isEmpty) {
+      _isUsernameValid = false;
+      _isButtonUsernameDisable = false;
+
+      _errorUsernameMessage = "Username Tidak Boleh Kosong!";
+    } else if (_username.length < 4) {
+      _isUsernameValid = false;
+      _isButtonUsernameDisable = false;
+
+      _errorUsernameMessage = "Username harus lebih dari 4 Huruf";
+    } else {
+      _isUsernameValid = true;
+      _isButtonUsernameDisable = true;
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +60,6 @@ class _LoginPageState extends State<LoginPage> {
               Icons.flutter_dash_sharp,
               size: 100,
             ),
-            const Text(
-              'Login',
-              style: TextStyle(fontSize: 50.0),
-            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -50,23 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextFieldCustome(
                     hintText: 'Username',
                     onChanged: (value) {
-                      _username = value;
-                      if (_username.isEmpty) {
-                        _isUsernameValid = false;
-                        _isButtonUsernameDisable = false;
-
-                        _errorUsernameMessage = "Username Tidak Boleh Kosong!";
-                      } else if (_username.length < 4) {
-                        _isUsernameValid = false;
-                        _isButtonUsernameDisable = false;
-
-                        _errorUsernameMessage =
-                            "Username harus lebih dari 4 Huruf";
-                      } else {
-                        _isUsernameValid = true;
-                        _isButtonUsernameDisable = true;
-                      }
-                      setState(() {});
+                      _validateUsername(value);
                     },
                     isValidTextField: _isUsernameValid,
                     errorMessage: _errorUsernameMessage,
@@ -116,7 +117,17 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ButtonCustome(
               onPressed: _isButtonUsernameDisable && _isButtonPasswordDisable
-                  ? () {}
+                  ? () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DashboardScreen(),
+                        ),
+                      );
+                      saveToken(
+                        valueToken: _username,
+                      );
+                    }
                   : null,
               isIcon: true,
               icon: const Icon(Icons.abc),

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/screen/login_page.dart';
+import 'package:flutter_application_2/provider/login_provider.dart';
+import 'package:provider/provider.dart';
+import 'screen/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => LoginProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: const SplashScreen(),
     );
   }
 }
