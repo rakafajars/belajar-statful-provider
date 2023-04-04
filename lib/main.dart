@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/provider/login_provider.dart';
+import 'package:flutter_application_2/provider/register_provider.dart';
 import 'package:provider/provider.dart';
 import 'screen/splash_screen.dart';
 
 void main() {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => LoginProvider())],
+      providers: [
+        ChangeNotifierProvider<LoginProvider>(
+          create: (_) => LoginProvider(),
+        ),
+        ChangeNotifierProvider<RegisterProvider>(
+          create: (_) => RegisterProvider(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );

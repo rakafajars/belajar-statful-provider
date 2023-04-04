@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/screen/dashboard_screen.dart';
 import 'package:flutter_application_2/screen/register_page.dart';
+import 'package:flutter_application_2/screen/register_with_provider_page.dart';
 import 'package:flutter_application_2/utils/shared_pref.dart';
 
 class LoginProvider with ChangeNotifier {
@@ -91,7 +92,7 @@ class LoginProvider with ChangeNotifier {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => const RegisterPage(),
+        builder: (_) => const RegisterWithProviderPage(),
       ),
     );
   }
