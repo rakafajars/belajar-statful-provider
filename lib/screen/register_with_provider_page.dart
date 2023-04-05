@@ -55,7 +55,9 @@ class RegisterWithProviderPage extends StatelessWidget {
                         registerProvider.showHidePassword();
                       },
                       icon: registerProvider.isHidePassword
-                          ? const Icon(Icons.lock)
+                          ? const Icon(
+                              Icons.lock,
+                            )
                           : const Icon(
                               Icons.lock_open,
                             ),
