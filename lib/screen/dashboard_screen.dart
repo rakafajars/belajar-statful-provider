@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/screen/create_contact_screen.dart';
 import 'package:flutter_application_2/screen/detail_contact_screen.dart';
 import 'package:flutter_application_2/screen/login_page.dart';
 import 'package:flutter_application_2/service/contact_service.dart';
@@ -32,8 +33,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Contacts',
+        ),
+      ),
+      floatingActionButton: Container(
+        height: 52,
+        width: 52,
+        decoration: const BoxDecoration(
+          color: Colors.blue,
+          shape: BoxShape.circle,
+        ),
+        child: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CreateContactScreen(),
+              ),
+            ).then(
+              (value) async {
+                await ContactService().getContact();
+                setState(() {});
+              },
+            );
+          },
+          icon: const Icon(
+            Icons.contact_phone,
+            color: Colors.white,
+          ),
         ),
       ),
       body: FutureBuilder(
@@ -59,6 +87,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     leading: Text(data?.id.toString() ?? "-"),
                     title: Text(data?.name ?? "-"),
                     subtitle: Text(data?.phone ?? "-"),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        ContactService().deleteContact(
+                          context,
+                          idContact: data?.id.toString() ?? "",
+                          name: data?.name ?? "",
+                        );
+                      },
+                    ),
                   ),
                 );
               },

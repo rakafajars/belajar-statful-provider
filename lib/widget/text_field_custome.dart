@@ -9,9 +9,10 @@ class TextFieldCustome extends StatelessWidget {
   final Widget? suffixIconWidget;
   final bool isReadOnly;
   final TextInputType? keyboardType;
+  final String? initialValue;
   const TextFieldCustome({
     super.key,
-    required this.onChanged,
+    this.onChanged,
     required this.isValidTextField,
     required this.errorMessage,
     required this.hintText,
@@ -19,6 +20,7 @@ class TextFieldCustome extends StatelessWidget {
     this.isReadOnly = false,
     this.suffixIconWidget,
     this.keyboardType = TextInputType.text,
+    this.initialValue,
   });
 
   @override
@@ -28,6 +30,7 @@ class TextFieldCustome extends StatelessWidget {
       keyboardType: keyboardType,
       onChanged: onChanged,
       obscureText: isObsucreText,
+      initialValue: initialValue,
       decoration: InputDecoration(
         hintText: hintText,
         labelText: hintText,
