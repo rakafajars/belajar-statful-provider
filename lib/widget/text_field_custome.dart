@@ -10,6 +10,7 @@ class TextFieldCustome extends StatelessWidget {
   final bool isReadOnly;
   final TextInputType? keyboardType;
   final String? initialValue;
+  final TextEditingController? controller;
   const TextFieldCustome({
     super.key,
     this.onChanged,
@@ -21,11 +22,13 @@ class TextFieldCustome extends StatelessWidget {
     this.suffixIconWidget,
     this.keyboardType = TextInputType.text,
     this.initialValue,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       readOnly: isReadOnly,
       keyboardType: keyboardType,
       onChanged: onChanged,

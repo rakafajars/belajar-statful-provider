@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/provider/login_provider.dart';
-import 'package:flutter_application_2/provider/register_provider.dart';
+import 'package:flutter_application_2/screen/dice_bear_screen.dart';
 import 'package:provider/provider.dart';
-import 'screen/splash_screen.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<LoginProvider>(
-          create: (_) => LoginProvider(),
-        ),
-        ChangeNotifierProvider<RegisterProvider>(
-          create: (_) => RegisterProvider(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const DiceBearScreen(),
     );
   }
 }
