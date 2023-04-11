@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_2/constant/api_url.dart';
+import 'package:flutter_application_2/db/database_helper.dart';
+import 'package:flutter_application_2/model/watchlist_movie_table.dart';
 import 'package:flutter_application_2/service/movie_service.dart';
 
 class DetailMovieScreen extends StatefulWidget {
@@ -13,6 +13,31 @@ class DetailMovieScreen extends StatefulWidget {
 }
 
 class _DetailMovieScreenState extends State<DetailMovieScreen> {
+  bool _isInsert = false;
+
+  WatchlistMovieTable? _watchlistMovieTable = WatchlistMovieTable(
+    id: -1,
+    title: "",
+    postPath: "",
+  );
+
+  void getWatchlistStatus() async {
+    _watchlistMovieTable = await DatabaseHelper().getStatusWatchlist(
+      int.parse(
+        widget.movieId,
+      ),
+    );
+    if (_watchlistMovieTable != null) {
+      _isInsert = true;
+    }
+  }
+
+  @override
+  void initState() {
+    getWatchlistStatus();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +58,36 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 children: [
                   Image.network(
                     "$urlImage/${detailMovie?.posterPath ?? "-"}",
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          if (_isInsert == true) {
+                            _isInsert = false;
+                            DatabaseHelper().removeWatchlist(
+                              detailMovie?.id ?? -1,
+                            );
+                          } else {
+                            _isInsert = true;
+                            DatabaseHelper().insertWatchlist(
+                              WatchlistMovieTable(
+                                id: detailMovie?.id ?? -1,
+                                title: detailMovie?.title ?? "",
+                                postPath: detailMovie?.posterPath ?? "",
+                              ),
+                            );
+                          }
+                          setState(() {});
+                        },
+                        icon: _isInsert == true
+                            ? const Icon(Icons.delete)
+                            : const Icon(
+                                Icons.add,
+                              ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

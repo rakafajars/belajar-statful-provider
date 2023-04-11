@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/constant/api_url.dart';
 import 'package:flutter_application_2/screen/detail_movie_screen.dart';
+import 'package:flutter_application_2/screen/watchlist_movie_screen.dart';
 import 'package:flutter_application_2/service/movie_service.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -17,6 +18,21 @@ class _ListMovieScreenState extends State<ListMovieScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movie'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WatchListMovieScreen(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.movie,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
