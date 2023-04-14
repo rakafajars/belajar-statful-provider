@@ -20,7 +20,6 @@ class _WatchListMovieScreenState extends State<WatchListMovieScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var data = snapshot.data;
-            print(data);
             return data?.isEmpty == true
                 ? const Center(child: Text('Kosong'))
                 : ListView.builder(

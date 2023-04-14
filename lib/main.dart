@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/screen/list_movie_screen.dart';
+import 'package:flutter_application_2/screen/movie/detail_movie_view_model.dart';
+import 'package:flutter_application_2/screen/movie/list_movie_view_model.dart';
+import 'package:flutter_application_2/screen/movie/new_list_movie_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ListMovieViewModel>(
+          create: (_) => ListMovieViewModel(),
+        ),
+        ChangeNotifierProvider<DetailMoviewViewModel>(
+          create: (_) => DetailMoviewViewModel(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ListMovieScreen(),
+      home: const NewListMovieScreen(),
     );
   }
 }

@@ -13,35 +13,35 @@ String listMoviePopularResponseToJson(ListMoviePopularResponse data) =>
 class ListMoviePopularResponse {
   ListMoviePopularResponse({
     required this.page,
-    required this.results,
+    required this.data,
     required this.totalPages,
     required this.totalResults,
   });
 
   int page;
-  List<Result> results;
+  List<ResultMovie> data;
   int totalPages;
   int totalResults;
 
   factory ListMoviePopularResponse.fromJson(Map<String, dynamic> json) =>
       ListMoviePopularResponse(
         page: json["page"],
-        results:
-            List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+        data: List<ResultMovie>.from(
+            json["results"].map((x) => ResultMovie.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
       );
 
   Map<String, dynamic> toJson() => {
         "page": page,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(data.map((x) => x.toJson())),
         "total_pages": totalPages,
         "total_results": totalResults,
       };
 }
 
-class Result {
-  Result({
+class ResultMovie {
+  ResultMovie({
     required this.adult,
     this.backdropPath,
     required this.genreIds,
@@ -73,7 +73,7 @@ class Result {
   double voteAverage;
   int voteCount;
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory ResultMovie.fromJson(Map<String, dynamic> json) => ResultMovie(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),

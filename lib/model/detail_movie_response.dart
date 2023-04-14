@@ -12,65 +12,63 @@ String detailMovieResponseToJson(DetailMovieResponse data) =>
 
 class DetailMovieResponse {
   DetailMovieResponse({
-    required this.adult,
-    required this.backdropPath,
-    required this.belongsToCollection,
-    required this.budget,
-    required this.genres,
-    required this.homepage,
-    required this.id,
-    required this.imdbId,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.productionCompanies,
-    required this.productionCountries,
-    required this.releaseDate,
-    required this.revenue,
-    required this.runtime,
-    required this.spokenLanguages,
-    required this.status,
-    required this.tagline,
-    required this.title,
-    required this.video,
-    required this.voteAverage,
-    required this.voteCount,
+    this.adult,
+    this.backdropPath,
+    this.belongsToCollection,
+    this.budget,
+    this.genres,
+    this.homepage,
+    this.id,
+    this.imdbId,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.popularity,
+    this.posterPath,
+    this.productionCompanies,
+    this.productionCountries,
+    this.releaseDate,
+    this.revenue,
+    this.runtime,
+    this.spokenLanguages,
+    this.status,
+    this.tagline,
+    this.title,
+    this.video,
+    this.voteAverage,
+    this.voteCount,
   });
 
-  bool adult;
-  String backdropPath;
-  BelongsToCollection belongsToCollection;
-  int budget;
-  List<Genre> genres;
-  String homepage;
-  int id;
-  String imdbId;
-  String originalLanguage;
-  String originalTitle;
-  String overview;
-  double popularity;
-  String posterPath;
-  List<ProductionCompany> productionCompanies;
-  List<ProductionCountry> productionCountries;
-  DateTime releaseDate;
-  int revenue;
-  int runtime;
-  List<SpokenLanguage> spokenLanguages;
-  String status;
-  String tagline;
-  String title;
-  bool video;
-  double voteAverage;
-  int voteCount;
+  bool? adult;
+  String? backdropPath;
+  BelongsToCollection? belongsToCollection;
+  int? budget;
+  List<Genre>? genres;
+  String? homepage;
+  int? id;
+  String? imdbId;
+  String? originalLanguage;
+  String? originalTitle;
+  String? overview;
+  double? popularity;
+  String? posterPath;
+  List<ProductionCompany>? productionCompanies;
+  List<ProductionCountry>? productionCountries;
+  DateTime? releaseDate;
+  int? revenue;
+  int? runtime;
+  List<SpokenLanguage>? spokenLanguages;
+  String? status;
+  String? tagline;
+  String? title;
+  bool? video;
+  double? voteAverage;
+  int? voteCount;
 
   factory DetailMovieResponse.fromJson(Map<String, dynamic> json) =>
       DetailMovieResponse(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        belongsToCollection:
-            BelongsToCollection.fromJson(json["belongs_to_collection"]),
         budget: json["budget"],
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
@@ -103,9 +101,9 @@ class DetailMovieResponse {
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "belongs_to_collection": belongsToCollection.toJson(),
+        "belongs_to_collection": belongsToCollection!.toJson(),
         "budget": budget,
-        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+        "genres": List<dynamic>.from(genres!.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
         "imdb_id": imdbId,
@@ -115,15 +113,15 @@ class DetailMovieResponse {
         "popularity": popularity,
         "poster_path": posterPath,
         "production_companies":
-            List<dynamic>.from(productionCompanies.map((x) => x.toJson())),
+            List<dynamic>.from(productionCompanies!.map((x) => x.toJson())),
         "production_countries":
-            List<dynamic>.from(productionCountries.map((x) => x.toJson())),
+            List<dynamic>.from(productionCountries!.map((x) => x.toJson())),
         "release_date":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+            "${releaseDate?.year.toString().padLeft(4, '0')}-${releaseDate?.month.toString().padLeft(2, '0')}-${releaseDate?.day.toString().padLeft(2, '0')}",
         "revenue": revenue,
         "runtime": runtime,
         "spoken_languages":
-            List<dynamic>.from(spokenLanguages.map((x) => x.toJson())),
+            List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
         "status": status,
         "tagline": tagline,
         "title": title,
